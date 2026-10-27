@@ -13,7 +13,7 @@
   var clearBtn = document.getElementById('clear-all');
 
   function say(msg, ok) {
-    say('');
+    status.textContent = '';
     status.className = 'status' + (ok ? ' ok' : '');
     if (ok) { var ic = document.createElement('img'); ic.src = 'assets/icon-success.svg'; ic.alt = ''; status.appendChild(ic); }
     status.appendChild(document.createElement('span')).textContent = msg;
