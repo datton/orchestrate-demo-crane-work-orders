@@ -39,7 +39,9 @@
       b.addEventListener('click', function () {
         var l = load(); l.splice(i, 1); save(l); render();
         status.textContent = 'Work order removed.';
-        exportBtn.focus();
+        // keep focus on a live control: the next Remove button, else the form
+        var next = tbody.querySelectorAll('button')[Math.min(i, tbody.querySelectorAll('button').length - 1)];
+        (next || document.getElementById('customer')).focus();
       });
       td.appendChild(b);
       tr.appendChild(td);
