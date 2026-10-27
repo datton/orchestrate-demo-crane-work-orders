@@ -1,10 +1,10 @@
 /* layout: ui/ux. Phone first. Colours and type come from tokens.css; fallbacks keep it readable until they land */
 :root{
   --_paper:var(--color-paper,#f6f4ef);--_surface:var(--color-surface,#fff);--_ink:var(--color-ink,#1b2430);
-  --_dark:var(--color-iron-800,#243241);--_dark2:var(--color-iron-600,#3c5066);--_accent:var(--color-rust-600,#a64b22);
-  --_line:var(--color-steel-200,#d5d9de);--_link:var(--color-link,#1d4f8c);--_focus:var(--color-focus,#0b63ce);
+  --_dark:var(--color-navy-800,#0a2a4d);--_dark2:var(--color-navy-700,#0f3a66);--_accent:var(--color-safety,#ffc20e);
+  --_line:var(--color-steel-300,#bcc3ca);--_link:var(--color-navy-700,#0f3a66);--_focus:var(--color-focus,#0b63ce);
   --_font:var(--font-body,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif);
-  --_gap:var(--space-4,1rem);--_max:var(--content-width,60rem);--_touch:48px;
+  --_gap:var(--space-4,1rem);--_max:var(--content-width,60rem);--_touch:3.25rem;
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -34,11 +34,22 @@ main p,main li{max-width:66ch}
 
 /* forms: big touch targets, labels above fields */
 label{display:block;font-weight:700;margin:1rem 0 .35rem}
-input,select,textarea{display:block;width:100%;min-height:var(--_touch);padding:.6rem .75rem;font:inherit;color:var(--_ink);background:var(--_surface);border:2px solid var(--color-steel-700,#4a5563);border-radius:6px}
+input,select,textarea{display:block;width:100%;min-height:var(--_touch);padding:.6rem .75rem;font:inherit;color:var(--_ink);background:var(--_surface);border:var(--field-border,2px solid #4a5460);border-radius:6px}
 textarea{min-height:8rem}
 fieldset{border:1px solid var(--_line);border-radius:6px;margin:1rem 0;padding:.5rem 1rem 1rem}
-button,.button{display:inline-flex;align-items:center;justify-content:center;min-height:var(--_touch);min-width:var(--_touch);padding:.6rem 1.25rem;font:inherit;font-weight:700;color:var(--_paper);background:var(--color-rust-700,#8a3b17);border:0;border-radius:6px;text-decoration:none;cursor:pointer}
-button:hover,.button:hover{filter:brightness(1.1)}
+button,.button{display:inline-flex;align-items:center;justify-content:center;min-height:var(--_touch);min-width:var(--_touch);padding:.6rem 1.25rem;font:inherit;font-weight:700;color:var(--_paper);background:var(--color-navy-700,#0f3a66);border:0;border-radius:6px;text-decoration:none;cursor:pointer}
+button:hover,.button:hover{background:var(--color-navy-800,#0a2a4d)}
+button:disabled,.button[aria-disabled="true"]{background:var(--color-steel-100,#e6e9ec);color:var(--color-steel-700,#4a5460);border:2px dashed var(--color-steel-300,#bcc3ca);cursor:not-allowed;opacity:1}
+button:disabled:hover{background:var(--color-steel-100,#e6e9ec)}
+
+/* form guidance: hint text, inline errors (icon + text, not colour alone), status message */
+.hint{margin:.25rem 0 0;font-size:.9rem;color:var(--color-steel-700,#4a5460)}
+.err{margin:.35rem 0 0;font-weight:700;color:var(--color-error-700,#b3261e)}
+.err:empty{display:none}
+.err::before{content:"\26A0\FE0E  "}
+input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="true"]{border:var(--field-border-error,2px solid #b3261e)}
+[role="status"]:not(:empty){margin:1rem 0;padding:.75rem 1rem;border-radius:6px;background:var(--color-success-bg,#e8f5ec);border:2px solid var(--color-success-700,#1e6b34);color:var(--color-success-700,#1e6b34);font-weight:700}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 form button[type=submit]{width:100%;margin-top:1.25rem}
 
 /* cards and lists: <ul class="cards"><li class="card"> */
