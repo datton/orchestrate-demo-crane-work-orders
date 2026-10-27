@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400" role="img" aria-label="Tower crane beside a building frame">
+  <title>Tower crane beside a building frame</title>
+  <rect width="800" height="400" fill="#e6e9ec"/>
+  <rect y="340" width="800" height="60" fill="#bcc3ca"/>
+  <rect x="520" y="200" width="160" height="140" fill="none" stroke="#4a5460" stroke-width="4"/>
+  <path d="M520 246 H680 M520 293 H680 M573 200 V340 M627 200 V340" stroke="#4a5460" stroke-width="3"/>
+  <rect x="190" y="330" width="80" height="14" fill="#14181d"/>
+  <g stroke="#ffc20e" stroke-width="8" fill="none" stroke-linejoin="round">
+    <path d="M214 330 V70 M246 330 V70"/>
+  </g>
+  <g stroke="#14181d" stroke-width="3" fill="none">
+    <path d="M214 330 L246 290 L214 250 L246 210 L214 170 L246 130 L214 90 L246 70 M246 330 L214 290 L246 250 L214 210 L246 170 L214 130 L246 90"/>
+  </g>
+  <rect x="204" y="50" width="52" height="24" fill="#14181d"/>
+  <g stroke="#ffc20e" stroke-width="7" fill="none">
+    <path d="M60 50 H640 M60 50 V62 M640 50 V62"/>
+  </g>
+  <path d="M230 50 L230 14 L110 50 M230 14 L600 50" stroke="#14181d" stroke-width="3" fill="none"/>
+  <rect x="60" y="56" width="40" height="30" fill="#14181d"/>
+  <path d="M520 54 V190" stroke="#14181d" stroke-width="3"/>
+  <rect x="505" y="190" width="30" height="10" fill="#14181d"/>
+  <path d="M520 200 L496 214 M520 200 L544 214" stroke="#14181d" stroke-width="3"/>
+</svg>
