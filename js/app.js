@@ -12,6 +12,13 @@
   var exportBtn = document.getElementById('export-csv');
   var clearBtn = document.getElementById('clear-all');
 
+  function say(msg, ok) {
+    say('');
+    status.className = 'status' + (ok ? ' ok' : '');
+    if (ok) { var ic = document.createElement('img'); ic.src = 'assets/icon-success.svg'; ic.alt = ''; status.appendChild(ic); }
+    status.appendChild(document.createElement('span')).textContent = msg;
+  }
+
   function load() {
     try { var v = JSON.parse(localStorage.getItem(KEY)); return Array.isArray(v) ? v : []; }
     catch (e) { return []; }
@@ -29,16 +36,18 @@
       ['date', 'customer', 'site', 'crane', 'jobtype', 'priority', 'description'].forEach(function (k) {
         var td = document.createElement('td');
         td.textContent = o[k];
+        td.setAttribute('data-label', labels[k]);
         tr.appendChild(td);
       });
       var td = document.createElement('td');
+      td.setAttribute('data-label', 'Remove');
       var b = document.createElement('button');
       b.type = 'button';
       b.textContent = 'Remove';
       b.setAttribute('aria-label', 'Remove work order for ' + o.customer + ' on ' + o.date);
       b.addEventListener('click', function () {
         var l = load(); l.splice(i, 1); save(l); render();
-        status.textContent = 'Work order removed.';
+        say('Work order removed.');
         // keep focus on a live control: the next Remove button, else the form
         var next = tbody.querySelectorAll('button')[Math.min(i, tbody.querySelectorAll('button').length - 1)];
         (next || document.getElementById('customer')).focus();
@@ -59,7 +68,9 @@
       var val = el.value.trim();
       data[f] = val;
       if (!val) {
-        err.textContent = labels[f] + ' is required.';
+        err.textContent = '';
+        var ic = document.createElement('img'); ic.src = 'assets/icon-error.svg'; ic.alt = ''; err.appendChild(ic);
+        err.appendChild(document.createElement('span')).textContent = 'Error: ' + labels[f] + ' is required.';
         err.hidden = false;
         el.setAttribute('aria-invalid', 'true');
         if (!first) first = el;
@@ -75,19 +86,19 @@
     e.preventDefault();
     var r = validate();
     if (r.first) {
-      status.textContent = 'Please fix the errors and try again.';
+      say('Please fix the errors and try again.');
       r.first.focus();
       return;
     }
     var list = load();
     list.push(r.data);
     if (!save(list)) {
-      status.textContent = 'Could not save: this browser is blocking storage.';
+      say('Could not save: this browser is blocking storage.');
       return;
     }
     form.reset();
     render();
-    status.textContent = 'Work order saved.';
+    say('Work order saved.', true);
     document.getElementById('customer').focus();
   });
 
@@ -110,11 +121,11 @@
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(a.href);
-    status.textContent = 'CSV exported.';
+    say('CSV exported.');
   });
   clearBtn.addEventListener('click', function () {
     if (window.confirm('Delete all saved work orders on this device?')) {
-      save([]); render(); status.textContent = 'All work orders deleted.';
+      save([]); render(); say('All work orders deleted.');
     }
   });
   render();
